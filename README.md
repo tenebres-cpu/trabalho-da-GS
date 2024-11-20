@@ -6,7 +6,7 @@ Ana Luiza Santana da Rocha - RM:561194
 
 # Sistema de Monitoramento de Energia Solar
 
-## 📋 Descrição do Projeto
+## Descrição do Projeto
 Este projeto simula um sistema básico de monitoramento de energia solar, exibindo dados como potência gerada, número de cargas conectadas e a eficiência estimada do painel solar. Os valores são atualizados dinamicamente e exibidos em um LCD.
 
 Este código foi desenvolvido por:
@@ -15,7 +15,7 @@ Este código foi desenvolvido por:
 
 ---
 
-## 🛠️ Componentes Utilizados
+## Componentes Utilizados
 ### Hardware:
 - Arduino Uno (ou compatível)
 - Módulo LCD 16x2 com comunicação I2C
@@ -28,7 +28,7 @@ Este código foi desenvolvido por:
 
 ---
 
-## 🚀 Como Funciona
+## Como Funciona
 1. **Potência Gerada**: Um valor aleatório entre 100W e 300W é gerado e exibido no LCD.
 2. **Cargas Conectadas**: Simula entre 1 e 5 cargas conectadas ao sistema.
 3. **Eficiência do Painel**: Exibe uma porcentagem aleatória de eficiência entre 50% e 100%.
@@ -37,7 +37,7 @@ Os dados são exibidos alternadamente no LCD a cada 3 segundos.
 
 ---
 
-## ⚙️ Configuração do Ambiente
+##  Configuração do Ambiente
 ### Requisitos:
 - Arduino IDE (ou simulação no Wokwi)
 - Biblioteca: `Wire.h` (padrão na IDE Arduino)
@@ -54,7 +54,7 @@ Os dados são exibidos alternadamente no LCD a cada 3 segundos.
 
 ---
 
-## 📂 Código Fonte
+## Código Fonte
 ```cpp
 #include <Wire.h>
 #include <LiquidCrystal_I2C.h>
