@@ -1,3 +1,9 @@
+Feito por: 
+Marcelo Affonso Fonseca - RM:559790
+Ana Luiza Santana da Rocha - RM:561194
+
+
+
 # Sistema de Monitoramento de Energia Solar
 
 ## 📋 Descrição do Projeto
