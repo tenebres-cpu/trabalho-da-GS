@@ -1,37 +1,38 @@
- Otimização de Energia Solar para Residências
+# Sistema de Monitoramento de Energia Solar
 
- 📋 Descrição do Projeto
-Este projeto visa otimizar o uso de energia solar em residências utilizando o Arduino como base. O sistema monitora a **potência gerada**, a **eficiência do painel solar** e o **nível de carga da bateria** (simulados). Os dados são exibidos em um LCD, fornecendo informações em tempo real para auxiliar no gerenciamento da energia.
+## 📋 Descrição do Projeto
+Este projeto simula um sistema básico de monitoramento de energia solar, exibindo dados como potência gerada, número de cargas conectadas e a eficiência estimada do painel solar. Os valores são atualizados dinamicamente e exibidos em um LCD.
+
+Este código foi desenvolvido por:
+- **Marcelo Affonso Fonseca**
+- **Ana Luiza Santana da Rocha**
 
 ---
 
- 🛠️ Componentes Utilizados
- Hardware:
+## 🛠️ Componentes Utilizados
+### Hardware:
 - Arduino Uno (ou compatível)
 - Módulo LCD 16x2 com comunicação I2C
-- Potenciômetro (simulação de sensor de tensão da bateria)
-- LDR (simulação de eficiência do painel solar)
-- Resistores de 10kΩ
 - Protoboard e fios de conexão
 
- Software:
+### Software:
 - Simulador: [Wokwi](https://wokwi.com/)
 - Linguagem: C++ para Arduino
 - IDE Arduino ou integração no Wokwi
 
 ---
 
- 🚀 Como Funciona
-1. **Medição de Potência**: Simulada usando um potenciômetro, a potência gerada é exibida no LCD em watts (W).
-2. **Eficiência do Painel**: O LDR mede a luminosidade para estimar a eficiência do painel solar em porcentagem (%).
-3. **Nível de Carga da Bateria**: A carga da bateria é simulada pela leitura analógica de um potenciômetro.
+## 🚀 Como Funciona
+1. **Potência Gerada**: Um valor aleatório entre 100W e 300W é gerado e exibido no LCD.
+2. **Cargas Conectadas**: Simula entre 1 e 5 cargas conectadas ao sistema.
+3. **Eficiência do Painel**: Exibe uma porcentagem aleatória de eficiência entre 50% e 100%.
 
-O sistema alterna entre as informações no LCD, exibindo dados essenciais em tempo real.
+Os dados são exibidos alternadamente no LCD a cada 3 segundos.
 
 ---
 
- ⚙️ Configuração do Ambiente
- Requisitos:
+## ⚙️ Configuração do Ambiente
+### Requisitos:
 - Arduino IDE (ou simulação no Wokwi)
 - Biblioteca: `Wire.h` (padrão na IDE Arduino)
 - Biblioteca: `LiquidCrystal_I2C.h`  
@@ -39,38 +40,58 @@ O sistema alterna entre as informações no LCD, exibindo dados essenciais em te
   1. Vá para **Ferramentas > Gerenciar Bibliotecas**.
   2. Pesquise por **LiquidCrystal I2C** e instale a versão mais recente.
 
- Montagem:
+### Montagem:
 1. Conecte o LCD ao Arduino via interface I2C:
    - **VCC e GND**: alimentação.
    - **SDA e SCL**: comunicação.
-2. Conecte o potenciômetro ao pino A0 para simular a tensão da bateria.
-3. Monte o LDR com um divisor resistivo conectado ao pino A1.
+2. Certifique-se de que o endereço I2C do LCD é **0x27**.
 
 ---
 
- 📂 Código Fonte
-O código completo está disponível no arquivo [`main.ino`](./main.ino). Para usar:
-1. Faça o upload do código para o Arduino.
-2. Certifique-se de que o LCD esteja conectado corretamente.
-3. No Wokwi, importe o arquivo ou copie e cole o código na IDE Arduino.
+## 📂 Código Fonte
+```cpp
+#include <Wire.h>
+#include <LiquidCrystal_I2C.h>
 
----
+// Configuração do LCD I2C
+LiquidCrystal_I2C lcd(0x27, 16, 2); // Endereço I2C, colunas, linhas
 
- 🖥️ Instruções de Uso
-1. Execute a simulação no [Wokwi](https://wokwi.com/).
-2. Ajuste o potenciômetro para alterar os valores de potência e carga.
-3. Observe as leituras no LCD, que alternam entre:
-   - **Potência gerada em watts**.
-   - **Número de cargas conectadas**.
-   - **Eficiência do painel em porcentagem**.
+void setup() {
+  // Inicializa o LCD
+  lcd.init();       // Inicializa o LCD
+  lcd.backlight();  // Ativa a luz de fundo do LCD
+}
 
----
+void loop() {
+  // Simula valores dinâmicos que poderiam ser exibidos no LCD
+  int potencia = random(100, 300); // Potência aleatória entre 100W e 300W
+  int cargas = random(1, 6);       // Número de cargas entre 1 e 5
+  int porcentagem = random(50, 100); // Porcentagem de eficiência entre 50% e 100%
 
- 🔗 Link para a Simulação no Wokwi
-[**Clique aqui para acessar o modelo no Wokwi**](#)  
-*(Insira o link gerado pelo Wokwi após finalizar sua montagem.)*
+  // Exibe os valores no LCD
+  lcd.clear(); // Limpa o display
 
----
+  lcd.setCursor(0, 0); // Primeira linha
+  lcd.print("Potencia: ");
+  lcd.print(potencia);
+  lcd.print("W");
 
- 🧾 Licença
-Este projeto é distribuído sob a licença MIT. Consulte o arquivo [LICENSE](./LICENSE) para mais detalhes.
+  lcd.setCursor(0, 1); // Segunda linha
+  lcd.print("Cargas: ");
+  lcd.print(cargas);
+  lcd.print(" ");
+
+  delay(3000); // Aguarda 3 segundos
+
+  lcd.clear(); // Limpa o display
+
+  lcd.setCursor(0, 0); // Primeira linha
+  lcd.print("Painel: ");
+  lcd.print(porcentagem);
+  lcd.print("%");
+
+  lcd.setCursor(0, 1); // Segunda linha
+  lcd.print("de eficiencia");
+  
+  delay(3000); // Aguarda 3 segundos
+}
